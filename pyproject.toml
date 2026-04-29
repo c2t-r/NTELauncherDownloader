@@ -1,0 +1,29 @@
+[project]
+name = "nte-launcher"
+version = "0.1.1"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = ["httpx>=0.28.1"]
+
+[dependency-groups]
+dev = ["ruff>=0.15.12", "taskipy>=1.14.1", "ty>=0.0.32"]
+
+[tool.taskipy.tasks]
+lint = "uv run ruff check . && uv run ty check"
+fmt = "uv run ruff format ."
+fix = "uv run ruff check --unsafe-fixes --fix . && uv run ruff format ."
+run = "uv run main.py"
+
+[tool.ruff]
+exclude = [".venv", ".ruff_cache", "*/**/__init__.py"]
+lint.select = ["F", "UP", "I", "E", "ANN"]
+lint.ignore = ["ANN401"]
+line-length = 120
+indent-width = 2
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
